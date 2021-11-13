@@ -8,10 +8,48 @@
 
         <link rel="stylesheet" href="CSS/CSSreset.css">
         <link rel="stylesheet" href="CSS/style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
     </head>
     <body>
-        
+        <header>
+            <img src="Imagens/logo.jpg"/>
+            <ion-icon name="people" class="users"></ion-icon>
+        </header>
 
+        <main>
+            <div class="chatscreen">
+                <div class="message in-out">
+                    <div class="hour">(09:21:45)</div>
+                    <div class="text"> <span>João</span> entra na sala...</div>
+                </div>
+                <div class="message">
+                    <div class="hour">(09:21:45)</div>
+                    <div class="text"> <span>João</span> para <span>Todos</span>: Bom dia!!</div>
+                </div>
+                <div class="message">
+                    <div class="hour">(09:21:45)</div>
+                    <div class="text"> <span>Maria</span> para <span>João</span>: Bom dia João :)</div>
+                </div>
+                <div class="message private">
+                    <div class="hour">(09:21:45)</div>
+                    <div class="text"> <span>João</span> reservadamente para <span>Maria</span>: Oi gatinha quer tc?</div>
+                </div>
+                <div class="message in-out">
+                    <div class="hour">(09:21:45)</div>
+                    <div class="text"> <span>Maria</span> sai da sala...</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <input type="text" value="Escreva aqui...">
+            <ion-icon name="paper-plane-outline" class="send"></ion-icon>
+        </footer>
+
+        <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
         <script src="Js/script.js"></script>
     </body>
 </html>
