@@ -22,8 +22,9 @@
         <main>
             <div class="inputscreen">
                 <img src="Imagens/logo.jpg"/>
-                <input type="text" value="Digite seu nome">
-                <button class="enter">Entrar</button>
+                <input type="text" value="Digite seu nome" onclick="clickinput(this)">
+                <button class="enter" onclick="startchat()">Entrar</button>
+                <p class="erro minimize">Já existe um usuário online com esse nome</p>
             </div>
             <div class="chatscreen">
                 <div class="message in-out">
@@ -97,10 +98,11 @@
         </main>
 
         <footer>
-            <input type="text" value="Escreva aqui...">
+            <input type="text" value="Escreva aqui..." onclick="clickinput(this)">
             <ion-icon name="paper-plane-outline" class="send"></ion-icon>
         </footer>
 
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
         <script src="Js/script.js"></script>
     </body>

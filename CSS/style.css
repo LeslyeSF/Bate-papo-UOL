@@ -54,7 +54,7 @@ main{
     top: 0;
     z-index: 2;
 
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
 }
@@ -87,6 +87,9 @@ main{
 
     margin: 15px 0px 15px 0px;
     border: 0;
+}
+.erro{
+    color: #FF0000;
 }
 .chatscreen{
     width: 100%;
@@ -233,4 +236,11 @@ footer ion-icon{
 
 .selected ion-icon:nth-child(2){
     display: initial;
+}
+.minimize{
+    display: none;
+}
+footer .textinput, .inputscreen .textinput{
+    font-style: normal;
+    color: #000000;
 }
