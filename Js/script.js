@@ -3,9 +3,9 @@ let addressee = "Todos", type = "message";
 
 
 function startchat(){
-    name_user = document.querySelector(".inputscreen input");
+    name_user = document.querySelector(".inputscreen input").value;
 
-    const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name: name_user.value});
+    const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name: name_user});
     
     promise.then(() => {
         const screen = document.querySelector(".inputscreen");
@@ -28,7 +28,7 @@ function startchat(){
 }
 function stayonline(){
     setInterval(() => {
-        axios.post('https://mock-api.driven.com.br/api/v4/uol/status', {name: name_user.value});
+        axios.post('https://mock-api.driven.com.br/api/v4/uol/status', {name: name_user});
     }, 4500);
 }
 function message_users(answer){
@@ -62,7 +62,13 @@ function message_users(answer){
     }
 
 }
-
+function send_message(){
+    document.querySelector("footer input").value
+    
+    const messagepromisse = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages',{from: name_user, to: addressee, text:document.querySelector("footer input").value, type: type });
+    messagepromisse.then((resposta) => {alert("funcionou")});
+    messagepromisse.catch((erro) => {console.log(erro.response);});
+}
 function clickinput(input){
     if(!input.classList.contains("textinput")){
         input.classList.add("textinput");
