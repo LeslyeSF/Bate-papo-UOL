@@ -44,6 +44,50 @@ main{
     width: 100%;
     height: 100%;
 }
+.inputscreen{
+    width: 100%;
+    height: 100%;
+    
+    background-color: #FFFFFF;
+
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+.inputscreen img{
+    width: 130px;
+
+    margin-top: 72px;
+    margin-bottom: 94px;
+}
+.inputscreen input{
+    width: 261px;
+    height: 54px;
+
+    border: 1px solid #D7D7D7;
+    text-align: center;
+
+    font-size: 18px;
+    color: #AEAEAE;
+}
+.inputscreen .enter{
+    width: 109px;
+    height: 45px;
+
+    background-color: #E5E5E5;
+
+    border-radius: 9px;
+
+    font-size: 18px;
+    color: #696969 ;
+
+    margin: 15px 0px 15px 0px;
+    border: 0;
+}
 .chatscreen{
     width: 100%;
     
@@ -87,7 +131,66 @@ span{
 .private{
     background-color: #FFDEDE;
 }
+.userscreen{
+    width: 100%;
+    height: 100%;
 
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    display: none;
+}
+.shadow{
+    height: 100%;
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.options{
+    width: 259px;
+    height: 100%;
+
+    background-color: #FFFFFF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    font-weight: 700;
+    font-size: 16px;
+
+    line-height: 20px;
+
+    text-align: center;
+
+    margin: 24px 0px 24px 0px;
+}
+.list{
+    width: 227px;
+    line-height: 36px;
+
+    font-size: 16px;
+}
+.list li{
+    display: flex;
+    align-items: center;
+
+    position: relative;
+}
+.list li ion-icon{
+    font-size: 20px;
+
+    margin-right: 8px;
+}
+.check{
+    color: #28BB25;
+
+    position: absolute;
+    right: 0;
+
+    display: none;
+}
 footer{
     width: 100%;
     height: 80px;
@@ -116,7 +219,7 @@ footer input{
     
     border: 0;
 }
-footer input:focus{
+footer input:focus, .inputscreen input:focus{
     box-shadow: 0 0 0 0;
     outline: 0;
 }
@@ -126,4 +229,8 @@ footer ion-icon{
 
     margin-left: 14px;
     margin-right: 18px;
+}
+
+.selected ion-icon:nth-child(2){
+    display: initial;
 }
