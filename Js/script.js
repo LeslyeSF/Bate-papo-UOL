@@ -15,6 +15,7 @@ function startchat(){
 
         const messagepromisse = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages');
         messagepromisse.then(message_users);
+        messagepromisse.catch((erro) => {console.log(erro.response);});
     });
 
     promise.catch((answer) => {
@@ -28,7 +29,9 @@ function startchat(){
 }
 function stayonline(){
     setInterval(() => {
-        axios.post('https://mock-api.driven.com.br/api/v4/uol/status', {name: name_user});
+        const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/status', {name: name_user});
+        promise.then((answer) => {console.log(answer.data);});
+        promise.catch((erro) => {console.log(erro.data);});
     }, 4500);
 }
 function message_users(answer){
@@ -63,11 +66,12 @@ function message_users(answer){
 
 }
 function send_message(){
-    document.querySelector("footer input").value
+    const input = document.querySelector("footer input");
     
-    const messagepromisse = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages',{from: name_user, to: addressee, text:document.querySelector("footer input").value, type: type });
-    messagepromisse.then((resposta) => {alert("funcionou")});
+    const messagepromisse = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages',{from: name_user, to: addressee, text:input.value, type: type });
+    messagepromisse.then((answer) => {console.log(answer.data);});
     messagepromisse.catch((erro) => {console.log(erro.response);});
+    input.value = "";
 }
 function clickinput(input){
     if(!input.classList.contains("textinput")){
