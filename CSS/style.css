@@ -163,7 +163,6 @@ span{
     flex-direction: column;
     align-items: center;
 
-    overflow-y: scroll;
 }
 .title{
     font-weight: 700;
@@ -177,10 +176,12 @@ span{
 }
 .list{
     width: 227px;
+    height: 500px;
     line-height: 36px;
 
     font-size: 16px;
 
+    overflow-y: scroll;
 }
 .list li{
     display: flex;
@@ -192,6 +193,10 @@ span{
     font-size: 20px;
 
     margin-right: 8px;
+}
+.list li p{
+    max-width: 170px;
+    word-wrap: break-word;
 }
 .check{
     color: #28BB25;

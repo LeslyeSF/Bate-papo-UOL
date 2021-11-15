@@ -22,8 +22,8 @@
         <main>
             <div class="inputscreen">
                 <img src="Imagens/logo.jpg"/>
-                <input type="text" value="Digite seu nome" onclick="clickinput(this)">
-                <button class="enter" onclick="startchat()">Entrar</button>
+                <input type="text" value="Digite seu nome" onclick="clickinput(this)" data-identifier="enter-name">
+                <button class="enter" onclick="startchat()" data-identifier="start">Entrar</button>
                 <p class="erro minimize">Já existe um usuário online com esse nome</p>
             </div>
             <div class="chatscreen">
@@ -96,7 +96,7 @@
                 <div class="options">
                     <p class="title">Escolha um contato <br> para enviar mensagem:</p>
                     <ul class="list participants">
-                        <li class="selected" onclick="selected(this, 'participants')">
+                        <li class="selected" onclick="selected(this, 'participants')" data-identifier="participant">
                             <ion-icon name="people" class="users"></ion-icon>
                             <p>Todos</p>
                             <ion-icon name="checkmark-outline" class="check"></ion-icon>
@@ -104,12 +104,12 @@
                     </ul>
                     <p class="title">Escolha a visibilidade:</p>
                     <ul class="list to">
-                        <li class="selected" onclick="selected(this, 'to')">
+                        <li class="selected" onclick="selected(this, 'to')" data-identifier="visibility">
                             <ion-icon name="lock-open"></ion-icon>
                             <p>Público</p>
                             <ion-icon name="checkmark-outline" class="check"></ion-icon>
                         </li>
-                        <li onclick="selected(this, 'to')">
+                        <li onclick="selected(this, 'to')" data-identifier="visibility">
                             <ion-icon name="lock-closed"></ion-icon>
                             <p>Reservadamente</p>
                             <ion-icon name="checkmark-outline" class="check"></ion-icon>

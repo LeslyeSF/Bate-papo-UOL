@@ -1,5 +1,5 @@
 let name_user;
-let addressee = "Todos", type = "message", to = "Público";
+let addressee = "Todos", type = "message", to = "Público", id = null;
 
 
 function startchat(){
@@ -36,41 +36,56 @@ function message_users(){
     const messagepromisse = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages');
     messagepromisse.then((answer) => {
         const message = document.querySelector(".chatscreen");
-        message.innerHTML="";
-        for(let i = 0; i < answer.data.length; i++){
-            if(answer.data[i].type === 'status'){
-                message.innerHTML +=`
-                <div class="message in-out" data-identifier="message">
-                        <div class="hour">(${answer.data[i].time})</div>
-                        <div class="text"><span>${answer.data[i].from}</span> ${answer.data[i].text}</div>
-                </div>
-                `;
-            } else if(answer.data[i].type === 'private_message'){
-                if(answer.data[i].to === name_user || answer.data[i].from == name_user){
-                    message.innerHTML +=`
-                    <div class="message private" data-identifier="message">
-                            <div class="hour">(${answer.data[i].time})</div>
-                            <div class="text"><span>${answer.data[i].from}</span> reservadamente para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
-                    </div>
-                    `;
+        if(message.querySelector(".message") === null){
+            input_messages(answer, message, 0);
+        } else{
+            let lastmessage_hour = document.querySelector(".message:last-child .hour").innerHTML;
+            let number_message;
+            for(let i = 0; i<answer.data.length; i++){
+                if(lastmessage_hour === `(${answer.data[i].time})`){
+                    number_message = i +1;
                 }
-            } else{
-                message.innerHTML +=`
-                <div class="message" data-identifier="message">
-                        <div class="hour">(${answer.data[i].time})</div>
-                        <div class="text"><span>${answer.data[i].from}</span> para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
-                </div>
-                `;
             }
-            
+            input_messages(answer,message,number_message);
         }
+        
         const lastmessage = document.querySelector(".message:last-child");
         lastmessage.scrollIntoView();
     });
+
     messagepromisse.catch((erro) => {
         console.log(erro.response);
         window.location.reload(true);
     });
+}
+function input_messages(answer, message,start){
+    for(let i = start; i < answer.data.length; i++){
+        if(answer.data[i].type === 'status'){
+            message.innerHTML +=`
+            <div class="message in-out" data-identifier="message">
+                    <div class="hour">(${answer.data[i].time})</div>
+                    <div class="text"><span>${answer.data[i].from}</span> ${answer.data[i].text}</div>
+            </div>
+            `;
+        } else if(answer.data[i].type === 'private_message'){
+            if(answer.data[i].to === name_user || answer.data[i].from == name_user){
+                message.innerHTML +=`
+                <div class="message private" data-identifier="message">
+                        <div class="hour">(${answer.data[i].time})</div>
+                        <div class="text"><span>${answer.data[i].from}</span> reservadamente para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
+                </div>
+                `;
+            }
+        } else{
+            message.innerHTML +=`
+            <div class="message" data-identifier="message">
+                    <div class="hour">(${answer.data[i].time})</div>
+                    <div class="text"><span>${answer.data[i].from}</span> para <span>${answer.data[i].to}</span>: ${answer.data[i].text}</div>
+            </div>
+            `;
+        }
+        
+    }
 }
 function send_message(){
 
@@ -89,24 +104,55 @@ function send_message(){
 function users_area(){
     const screen_visibility = document.querySelector(".userscreen");
     screen_visibility.classList.toggle("minimize");
+    
     if(!(screen_visibility.classList.contains("minimize"))){
-        const promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants');
-        promise.then((answer) => {
-            let participants = document.querySelector(".participants");
+        participants_update(id);
+        id = setInterval(participants_update, 10000);
+    } else{
+        if(id !== null){
+            clearInterval(id);
+        }
+    }   
+}
+function participants_update(){
+    const promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants');
+    promise.then((answer) => {
+        let participants = document.querySelector(".participants");
+        let name_selected = "Todos";
+        if(document.querySelectorAll(".participants li").length > 1){
+            name_selected = participants.querySelector(".selected p").innerHTML;
+            participants.innerHTML = `
+                <li onclick="selected(this, 'participants')" data-identifier="participant">
+                    <ion-icon name="people" class="users"></ion-icon>
+                    <p>Todos</p>
+                    <ion-icon name="checkmark-outline" class="check"></ion-icon>
+                </li>
+            `;
 
-            for(let i = 0; i < answer.data.length; i++){
-                participants.innerHTML += `
-                <li onclick="selected(this, 'participants')">
+        }
+        for(let i = 0; i < answer.data.length; i++){
+            participants.innerHTML += `
+                <li onclick="selected(this, 'participants')" data-identifier="participant">
                     <ion-icon name="person-circle"></ion-icon>
                     <p>${answer.data[i].name}</p>
                     <ion-icon name="checkmark-outline" class="check"></ion-icon>
                 </li>
-                `;
+            `;
+        }
+        let verifycheck = document.querySelectorAll(".participants li");
+        for(let i = 0; i<verifycheck.length; i++){
+            if(name_selected === verifycheck[i].querySelector("p").innerHTML){
+                verifycheck[i].classList.add("selected");
             }
-        });
-        promise.catch((erro) => {console.log(erro.response)});
-    }
-    
+        }
+        if(document.querySelector(".participants .selected") === null){
+            document.querySelector(".participants li").classList.add("selected");
+        }
+
+        document.querySelector(".participants .selected").scrollIntoView();
+    });
+    promise.catch((erro) => {console.log(erro.response)});
+
 }
 function selected(selected, classname){
     const otherselected = document.querySelector("."+classname+" .selected");
