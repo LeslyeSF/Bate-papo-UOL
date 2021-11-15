@@ -162,6 +162,8 @@ span{
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    overflow-y: scroll;
 }
 .title{
     font-weight: 700;
@@ -178,6 +180,7 @@ span{
     line-height: 36px;
 
     font-size: 16px;
+
 }
 .list li{
     display: flex;
@@ -251,7 +254,7 @@ footer ion-icon{
     margin-right: 18px;
 }
 
-.selected ion-icon:nth-child(2){
+.selected ion-icon:nth-child(3){
     display: initial;
 }
 .minimize{

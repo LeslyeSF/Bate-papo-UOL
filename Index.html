@@ -98,42 +98,20 @@
                     <ul class="list participants">
                         <li class="selected" onclick="selected(this, 'participants')">
                             <ion-icon name="people" class="users"></ion-icon>
-                            Todos
+                            <p>Todos</p>
                             <ion-icon name="checkmark-outline" class="check"></ion-icon>
                         </li>
-                        <!--
-                        <li>
-                            <ion-icon name="person-circle"></ion-icon>
-                            Maria
-                            <ion-icon name="checkmark-outline" class="check"></ion-icon>
-                        </li>
-                        <li>
-                            <ion-icon name="person-circle"></ion-icon>
-                            Maria
-                            <ion-icon name="checkmark-outline" class="check"></ion-icon>
-                        </li>
-                        <li>
-                            <ion-icon name="person-circle"></ion-icon>
-                            Maria
-                            <ion-icon name="checkmark-outline" class="check"></ion-icon>
-                        </li>
-                        <li>
-                            <ion-icon name="person-circle"></ion-icon>
-                            Maria
-                            <ion-icon name="checkmark-outline" class="check"></ion-icon>
-                        </li>
-                        -->
                     </ul>
                     <p class="title">Escolha a visibilidade:</p>
                     <ul class="list to">
                         <li class="selected" onclick="selected(this, 'to')">
                             <ion-icon name="lock-open"></ion-icon>
-                            Público
+                            <p>Público</p>
                             <ion-icon name="checkmark-outline" class="check"></ion-icon>
                         </li>
                         <li onclick="selected(this, 'to')">
                             <ion-icon name="lock-closed"></ion-icon>
-                            Reservadamente
+                            <p>Reservadamente</p>
                             <ion-icon name="checkmark-outline" class="check"></ion-icon>
                         </li>
                     </ul>
@@ -144,9 +122,9 @@
         <footer>
             <div>
                 <input type="text" value="Escreva aqui..." onclick="clickinput(this)">
-                <p></p>
+                <p>Enviando para <span>Todos</span> (<span>Público</span>)</p>
             </div>
-            <ion-icon name="paper-plane-outline" class="send" onclick="send_message()"></ion-icon>
+            <ion-icon name="paper-plane-outline" class="send" onclick="send_message()" data-identifier="send-message"></ion-icon>
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
