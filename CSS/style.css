@@ -144,9 +144,9 @@ span{
 
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 5;
 
-    display: none;
+    display: flex;
 }
 .shadow{
     height: 100%;
@@ -214,8 +214,14 @@ footer{
     justify-content: space-between;
     align-items: center;
 }
-footer input{
+footer div{
     width: 300px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+}
+footer div input{
+    width: 100%;
     height: 30px;
 
     font-weight: 400;
@@ -226,7 +232,14 @@ footer input{
     
     border: 0;
 }
-footer input:focus, .inputscreen input:focus{
+footer div p{
+    color: #696969;
+    font-weight: 400;
+    font-size: 15px;
+
+    margin: 8px 0px 0px 17px;
+}
+footer div input:focus, .inputscreen input:focus{
     box-shadow: 0 0 0 0;
     outline: 0;
 }
