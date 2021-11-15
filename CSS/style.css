@@ -177,7 +177,7 @@ span{
 .list{
     width: 227px;
     height: 500px;
-    line-height: 36px;
+    line-height: 30px;
 
     font-size: 16px;
 
@@ -195,8 +195,8 @@ span{
     margin-right: 8px;
 }
 .list li p{
-    max-width: 170px;
-    word-wrap: break-word;
+    max-width: 150px;
+    overflow: hidden;
 }
 .check{
     color: #28BB25;

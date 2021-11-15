@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
+        <link rel="icon"  href="Imagens/uolicon.png">
         <title>Bate-Papo UOL</title>
 
         <meta charset="utf-8"/>
@@ -22,9 +23,9 @@
         <main>
             <div class="inputscreen">
                 <img src="Imagens/logo.jpg"/>
-                <input type="text" value="Digite seu nome" onclick="clickinput(this)" data-identifier="enter-name">
+                <input type="text" value="Digite seu nome" onclick="clickinput(this)" maxlength="22" minlength="2" data-identifier="enter-name">
                 <button class="enter" onclick="startchat()" data-identifier="start">Entrar</button>
-                <p class="erro minimize">Já existe um usuário online com esse nome</p>
+                <p class="erro minimize"></p>
             </div>
             <div class="chatscreen">
                <!--

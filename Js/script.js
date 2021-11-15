@@ -7,19 +7,26 @@ function startchat(){
 
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name: name_user});
     
-    promise.then(() => {
-        const screen = document.querySelector(".inputscreen");
-        screen.classList.add("minimize");
-
-        setInterval(stayonline, 5000);
-        message_users();
-        setInterval(message_users, 3000);
-    });
-
-    promise.catch((answer) => {
+    if(name_user.length > 4){
+        promise.then(() => {
+            const screen = document.querySelector(".inputscreen");
+            screen.classList.add("minimize");
+    
+            setInterval(stayonline, 5000);
+            message_users();
+            setInterval(message_users, 3000);
+        });
+    
+        promise.catch((answer) => {
+            const erro = document.querySelector(".inputscreen .erro");
+            erro.innerHTML="Já existe um usuário online com esse nome";
+            erro.classList.remove("minimize");
+        });
+    } else{
         const erro = document.querySelector(".inputscreen .erro");
+        erro.innerHTML="O nome deve ter no mínimo 5 caracteres";
         erro.classList.remove("minimize");
-    });
+    }
 
     
     
@@ -97,8 +104,7 @@ function send_message(){
             console.log(erro.response);
             window.location.reload(true);
         });
-        input.value = "Escreva aqui ...";
-        input.classList.remove("textinput");
+        input.value = "";
     }    
 }
 function users_area(){
@@ -131,13 +137,15 @@ function participants_update(){
 
         }
         for(let i = 0; i < answer.data.length; i++){
-            participants.innerHTML += `
+            if(answer.data[i].name !== name_user){
+                participants.innerHTML += `
                 <li onclick="selected(this, 'participants')" data-identifier="participant">
                     <ion-icon name="person-circle"></ion-icon>
                     <p>${answer.data[i].name}</p>
                     <ion-icon name="checkmark-outline" class="check"></ion-icon>
                 </li>
-            `;
+                `;
+            }
         }
         let verifycheck = document.querySelectorAll(".participants li");
         for(let i = 0; i<verifycheck.length; i++){
@@ -178,3 +186,13 @@ function clickinput(input){
         input.value = "";
     }
 }
+
+document.addEventListener("keypress", (buttom) =>{
+    if(buttom.key == "Enter"){
+        if(!(document.querySelector(".inputscreen").classList.contains("minimize"))){
+            document.querySelector(".inputscreen button").click();
+        } else{
+            document.querySelector("footer ion-icon").click();
+        }
+    }
+});
