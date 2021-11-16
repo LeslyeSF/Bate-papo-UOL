@@ -4,10 +4,9 @@ let addressee = "Todos", type = "message", to = "Público", id = null;
 
 function startchat(){
     name_user = document.querySelector(".inputscreen input").value;
-
-    const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name: name_user});
     
-    if(name_user.length > 4){
+    if(name_user.length > 2){
+        const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name: name_user});
         promise.then(() => {
             const screen = document.querySelector(".inputscreen");
             screen.classList.add("minimize");
@@ -24,7 +23,7 @@ function startchat(){
         });
     } else{
         const erro = document.querySelector(".inputscreen .erro");
-        erro.innerHTML="O nome deve ter no mínimo 5 caracteres";
+        erro.innerHTML="O nome deve ter no mínimo 3 caracteres";
         erro.classList.remove("minimize");
     }
 
@@ -110,15 +109,8 @@ function send_message(){
 function users_area(){
     const screen_visibility = document.querySelector(".userscreen");
     screen_visibility.classList.toggle("minimize");
-    
-    if(!(screen_visibility.classList.contains("minimize"))){
-        participants_update(id);
-        id = setInterval(participants_update, 10000);
-    } else{
-        if(id !== null){
-            clearInterval(id);
-        }
-    }   
+    participants_update();
+    setInterval(participants_update, 10000);   
 }
 function participants_update(){
     const promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants');
@@ -151,15 +143,25 @@ function participants_update(){
         for(let i = 0; i<verifycheck.length; i++){
             if(name_selected === verifycheck[i].querySelector("p").innerHTML){
                 verifycheck[i].classList.add("selected");
+                addressee = name_selected;
             }
         }
         if(document.querySelector(".participants .selected") === null){
             document.querySelector(".participants li").classList.add("selected");
+            addressee = "Todos";
+            
         }
 
         document.querySelector(".participants .selected").scrollIntoView();
+        const message_info = document.querySelector("footer p");
+        message_info.innerHTML = `Enviando para ${addressee} (${to})`;
     });
     promise.catch((erro) => {console.log(erro.response)});
+
+    //Caso particular
+    if(addressee === "Todos"){
+        selected(document.querySelector(".to li"), "to");
+    }
 
 }
 function selected(selected, classname){

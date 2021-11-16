@@ -3,11 +3,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 body{
     background-color: #E5E5E5;
     font-family: 'Roboto', sans-serif;
 }
-ion-icon:hover{
+ion-icon:hover, li:hover{
     cursor: pointer;
 }
 header{
